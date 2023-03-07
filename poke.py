@@ -1,4 +1,8 @@
 import random
+from colorama import init, Fore, Style
+
+# initialize colorama
+init()
 
 # define game variables
 player_pokemon = {"name": "Pikachu", "type": "Electric", "hp": 50, "attack": 10, "defense": 5, "speed": 20, "level": 5}
@@ -6,8 +10,6 @@ opponent_pokemon = {"name": "Charmander", "type": "Fire", "hp": 40, "attack": 8,
 player_turn = True
 
 # define game functions
-
-
 def attack(attacker, defender):
     damage = (2 * attacker["level"] / 5 + 2) * \
         attacker["attack"] / defender["defense"] + 2
@@ -15,10 +17,9 @@ def attack(attacker, defender):
     damage *= random.uniform(0.9, 1.1)
     damage = int(damage)
     defender["hp"] -= damage
-    print(
-        f"{attacker['name']} attacked {defender['name']} for {damage} damage!")
+    print(Fore.RED + f"{attacker['name']} attacked {defender['name']} for {damage} damage!" + Style.RESET_ALL)
     if defender["hp"] <= 0:
-        print(f"{defender['name']} fainted!")
+        print(Fore.GREEN + f"{defender['name']} fainted!" + Style.RESET_ALL)
         return True
     return False
 
@@ -26,21 +27,20 @@ def attack(attacker, defender):
 # game loop
 while True:
     # display player and opponent information
-    print(
-        f"{player_pokemon['name']} (HP: {player_pokemon['hp']}) vs. {opponent_pokemon['name']} (HP: {opponent_pokemon['hp']})")
+    print(Fore.YELLOW + f"{player_pokemon['name']} (HP: {player_pokemon['hp']}) vs. {opponent_pokemon['name']} (HP: {opponent_pokemon['hp']})" + Style.RESET_ALL)
 
     if player_turn:
         # player's turn
-        print("Choose an action:")
+        print(Fore.BLUE + "Choose an action:" + Style.RESET_ALL)
         print("1. Attack")
         print("2. Switch Pokémon")
         action = input("> ")
         if action == "1":
             attack(player_pokemon, opponent_pokemon)
         elif action == "2":
-            print("Switching Pokémon is not implemented yet.")
+            print(Fore.BLUE + "Switching Pokémon is not implemented yet." + Style.RESET_ALL)
         else:
-            print("Invalid action.")
+            print(Fore.RED + "Invalid action." + Style.RESET_ALL)
             continue
     else:
         # opponent's turn
@@ -48,12 +48,11 @@ while True:
 
     # check if the battle is over
     if player_pokemon["hp"] <= 0:
-        print("You lost the battle.")
+        print(Fore.RED + "You lost the battle." + Style.RESET_ALL)
         break
     elif opponent_pokemon["hp"] <= 0:
-        print("You won the battle!")
+        print(Fore.GREEN + "You won the battle!" + Style.RESET_ALL)
         break
 
     # switch turns
     player_turn = not player_turn
-
