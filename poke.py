@@ -1,10 +1,8 @@
 import random
 
 # define game variables
-player_pokemon = {"name": "Pikachu", "type": "Electric", "hp": 50, "attack": 10, "defense": 5, "speed":
-                  20}
-opponent_pokemon = {"name": "Charmander", "type": "Fire", "hp": 40, "attack": 8, "defense": 3, "speed":
-                    15}
+player_pokemon = {"name": "Pikachu", "type": "Electric", "hp": 50, "attack": 10, "defense": 5, "speed": 20, "level": 5}
+opponent_pokemon = {"name": "Charmander", "type": "Fire", "hp": 40, "attack": 8, "defense": 3, "speed": 15, "level": 5}
 player_turn = True
 
 # define game functions
@@ -58,3 +56,4 @@ while True:
 
     # switch turns
     player_turn = not player_turn
+
